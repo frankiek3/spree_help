@@ -1,0 +1,41 @@
+<%= render 'spree/admin/shared/configuration_menu' %>
+
+<% content_for :page_title do %>
+  <%= Spree.t(:editing_category_questions, scope: :spree_help) %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <li>
+    <%= link_to_add_fields Spree.t(:add_question, scope: :spree_help), "#questions", {class: 'button fa fa-plus', id: 'new_question_link'} %>
+    <%= button_link_to Spree.t(:back_to_categories, scope: :spree_help), spree.admin_question_categories_path, icon: 'arrow-left' %>
+  </li>
+<% end %>
+
+<%= render partial: 'spree/shared/error_messages', locals: { target: @question_category } %>
+
+<%= form_for [:admin, @question_category] do |f| %>
+  <div class="field">
+    <%= f.field_container :name do %>
+      <%= f.label :name, Spree.t(:category_name, scope: :spree_help) %> <span class="required">*</span><br />
+      <%= f.text_field :name, class: 'fullwidth title' %>
+      <%= f.error_message_on :name %>
+    <% end %>
+    <%= f.field_container :taxonomy do %>
+      <%= f.label :taxonomy, Spree.t(:taxonomy) %><br />
+      <%#= f.hidden_field :taxonomy_id %>
+      <%= f.collection_select(:taxonomy_id, @taxons, :id, :pretty_name, {include_blank: Spree.t('match_choices.none')}, {:placeholder => "None Selected", :class => 'select2 fullwidth' }) %>
+    <% end %>
+  </div>
+    <h3>Questions</h3>
+  <table id="questions" style="margin-bottom: 20px" class="index sortable" data-hook data-sortable-link="<%= url_for action: 'update_question_positions' %>">
+      <%= f.fields_for :questions do |question_form| %>
+        <%= render partial: 'question', locals: { f: question_form } %>
+      <% end %>
+  </table>
+
+  <div class="form-buttons filter-actions actions" data-hook="buttons">
+    <%= button Spree.t(:update), 'icon-refresh' %>
+    <span class="or"><%= Spree.t(:or) %></span>
+    <%= link_to_with_icon 'icon-remove', Spree.t(:cancel), spree.admin_question_categories_url, class: 'button' %>
+  </div>
+<% end %>

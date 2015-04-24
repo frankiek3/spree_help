@@ -1,0 +1,19 @@
+<% content_for :subheader do %>
+  <h1 class="page-title"><%= Spree.t(:help) %></h1>
+<% end %>
+
+<div id="help">
+  <ul class="list">
+    <li><%= link_to_with_icon('fa-question', Spree.t(:faq), faq_path, { class: '' }) %></li>
+    <li><%= link_to_with_icon('fa-question', Spree.t(:ask_a_question, scope: :spree_help), user_question_path, { class: '' }) %></li>
+  </ul>
+</div>
+
+
+<% content_for :sidebar do %>
+  <% if defined? @products && defined? @taxon %>
+    <%= render 'spree/shared/filters' %>
+  <% elsif defined? @taxonomies %>
+    <%= render 'spree/shared/taxonomies' %>
+  <% end %>
+<% end %>

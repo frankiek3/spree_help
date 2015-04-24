@@ -1,0 +1,21 @@
+<tr class="question fields" id="spree_<%= dom_id(f.object) %>" data-hook="question" class="<%= cycle('odd', 'even')%>">
+  <td class="no-border-bottom question fields">
+    <div class="no-border">
+      <span class="handle"></span>
+      <%= f.hidden_field :id %>
+    </div>
+    <div class="field">
+      <%= f.label :question, Spree::Question.model_name.human(count: 1) %> <span class="required">*</span><br />
+      <%= f.text_field :question, class: 'fullwidth title' %>
+      <%#= f.error_message_on :question %>
+    </div>
+    <div class="field">
+      <%= f.label :answer, Spree.t(:answer, scope: :spree_help) %> <span class="required">*</span><br />
+      <%= f.text_area :answer, rows: 2, class: 'fullwidth' %>
+      <%#= f.error_message_on :answer %>
+    </div>
+    <div class="actions">
+      <%= link_to_remove_fields Spree.t(:remove), f, no_text: true %>
+    </div>
+  </td>
+</tr>

@@ -1,0 +1,25 @@
+<%= render 'spree/admin/shared/configuration_menu' %>
+
+<% content_for :page_title do %>
+  <%= Spree.t(:new_question_category, scope: :spree_help) %>
+<% end %>
+
+<%= render partial: 'spree/shared/error_messages', locals: { target: @question_category } %>
+<%= form_for [:admin, @question_category] do |f| %>
+  <fieldset class="no-border-top">
+    <%= f.field_container :name do %>
+      <%= f.label :name, Spree.t(:name) %> <span class="required">*</span><br />
+      <%= f.text_field :name, class: 'fullwidth title'  %>
+      <%= f.error_message_on :name %>
+    <% end %>
+    <%= f.field_container :taxonomy do %>
+      <%= f.label :taxonomy, Spree.t(:taxonomy) %><br />
+      <%#= f.hidden_field :taxonomy_id %>
+      <%= f.collection_select(:taxonomy_id, @taxons, :id, :pretty_name, {include_blank: Spree.t('match_choices.none')}, {:placeholder => "None Selected", :class => 'select2 fullwidth' }) %>
+    <% end %>
+
+    <div data-hook="buttons" class="filter-actions actions">
+      <%= button Spree.t(:create), 'icon-ok' %>
+      </div>
+  </fieldset>
+<% end %>

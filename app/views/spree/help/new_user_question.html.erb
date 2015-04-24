@@ -1,0 +1,46 @@
+<% content_for :subheader do %>
+  <h1><%= Spree.t(:question_entry_form, scope: :spree_help) %></h1>
+<% end %>
+
+<%= render partial: 'spree/shared/error_messages', locals: { target: @user_question } %>
+
+<%= form_for @user_question, url: user_question_path, remote: true, method: :put do |f| %>
+
+  <div class="columns alpha ten" data-hook="_fieldset_wrapper">
+  <fieldset id="" data-hook></fieldset>
+
+  <% if try_spree_current_user %>
+    <%= f.hidden_field :user_id %>
+  <% else %>
+    <p class="field" data-hook="email">
+      <%= f.label :email, Spree.t(:email) %> <span class="required">*</span><br/>
+      <%= f.email_field :email, class: 'fullwidth title required email', placeholder: "user@email.com" %>
+    </p>
+  <% end %>
+
+    <p class="field" data-hook="question_category">
+      <%= f.label :question_category, Spree.t(:question_category, scope: :spree_help) %><br/>
+      <%= f.collection_select(:question_category_id, Spree::QuestionCategory.all, :id, :name, { }, {:placeholder => "None Selected", :multiple => true, :class => 'select2 fullwidth' }) %>
+    </p>
+
+    <p class="field" data-hook="link">
+      <%= f.label :link, Spree.t(:link) %><br/>
+      <%= f.text_field :link, class: 'fullwidth title required' %>
+    </p>
+
+    <p class="field" data-hook="question">
+      <%= f.label :question, Spree.t(:question, scope: :spree_help) %> <span class="required">*</span><br/>
+      <%= f.text_area :question, { rows: '20', class: 'fullwidth required'} %>
+    </p>
+
+    <p><%= f.submit Spree.t(:submit), class: 'button primary', tabindex: 4 %></p>
+  </div>
+<% end %>
+
+
+<% content_for :sidebar do %>
+  <% if defined? @taxonomies %>
+    <%= render 'spree/shared/taxonomies' %>
+  <% end %>
+<% end %>
+

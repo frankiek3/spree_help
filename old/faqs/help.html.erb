@@ -1,0 +1,14 @@
+<h1><%= Spree.t(:frequently_asked_questions, scope: :spree_help) %></h1>
+
+<div id="faqs">
+</div>
+
+<%= render partial: 'spree/faqs/add_user_question', locals: { target: @user_question } %>
+
+<% content_for :sidebar do %>
+  <% if defined? @products && defined? @taxon %>
+    <%= render 'spree/shared/filters' %>
+  <% elsif defined? @taxonomies %>
+    <%= render 'spree/shared/taxonomies' %>
+  <% end %>
+<% end %>

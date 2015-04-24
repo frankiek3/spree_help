@@ -1,0 +1,15 @@
+$('#new_question_category').html('<%= escape_javascript(render template: "spree/admin/question_categories/new", formats: [:html], handlers: [:erb]) %>');
+//$('#new_question_category_link').parent().hide();
+
+var set_taxon_select2 = function(){
+  if ($('#question_category_taxonomy_id').length) {
+    $('#question_category_taxonomy_id').select2();
+    $('#question_category_taxonomy_id').on("change", function(e) { 
+      $('#question_category_name').val($("#question_category_taxonomy_id option:selected").text());
+    });
+  }
+}
+
+$(document).ready(function () {
+  set_taxon_select2();
+});
