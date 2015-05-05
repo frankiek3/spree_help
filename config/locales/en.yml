@@ -8,6 +8,9 @@ en:
       spree/question:
         one: Question
         other: Questions
+      spree/user_question:
+        one: User Question
+        other: User Questions
   spree:
     submit: Submit
     faq: FAQ
@@ -23,6 +26,7 @@ en:
       create_category: Create Category
       editing_category_questions: Editing Category Questions
       frequently_asked_questions: Frequently Asked Questions
+      faq_categories: FAQ Categories
       new_question_category: New Category
       question_categories: Frequently Asked Questions
       question_categories_admin: FAQ

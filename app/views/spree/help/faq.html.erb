@@ -38,13 +38,11 @@
     <ul class="nav">
     <% @categories.each do |category| %>
       <% next unless category.questions.active.any? %>
-      <% cache(category, 'nav') do %>
         <li>
           <a href="#<%= category.name.to_url %>">
             <%= h category.name %>
           </a>
         </li>
-      <% end %>
     <% end %>
   </div>
 <% end if @categories.any? %>
