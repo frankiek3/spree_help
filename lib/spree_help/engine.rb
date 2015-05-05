@@ -1,4 +1,4 @@
-module SpreeFaq
+module SpreeHelp
   class Engine < Rails::Engine
     require 'spree/core'
     isolate_namespace Spree

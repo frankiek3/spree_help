@@ -46,3 +46,44 @@
     <%= link_to Spree.t(:add_one), spree.new_admin_question_category_path %>!
   </div>
 <% end %>
+
+
+
+<% if @user_questions.any? %>
+<table class="index" id="listing_faq">
+  <colgroup>
+    <col style="width: 40%">
+    <col style="width: 40%">
+    <col style="width: 20%">
+  </colgroup>
+  <thead>
+    <tr data-hook="admin_faq_category_index_headers">
+      <th><%= Spree::UserQuestion.model_name.human(count: 2) %></td>
+      <th><%= Spree::Question.model_name.human(count: 2) %></td>
+      <th data-hook="admin_faq_category_index_header_actions" class="actions"></th>
+    </tr>
+  <thead>
+  <tbody>
+    <% @user_questions.each do |user_question| %>
+      <tr id="<%= spree_dom_id user_question %>" data-hook="admin_user_question_index_rows" class="<%= cycle('odd', 'even') %>">
+        <td class="align-center"><%= h user_question.question.nil? ? "waiting" : "answered" %></td>
+        <td class="align-center">
+        <% if user_question.question_category.nil? %>
+          None
+        <% else %>
+          <%= user_question.question_category.name %>
+        <% end %>
+        </td>
+        <td class="actions" data-hook="admin_user_question_index_row_actions">
+          <%= link_to_edit_url spree.send("edit_admin_user_question_path", user_question), no_text: true %>
+          <%#= link_to_delete user_question, no_text: true %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% else %>
+  <div class="alpha twelve columns no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: Spree::UserQuestion.model_name.human(count: 2)) %>,
+  </div>
+<% end %>

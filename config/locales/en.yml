@@ -29,5 +29,6 @@ en:
       question_category: Question Category
       question: Question
       question_entry_form: Question Entry Form
+      new_question_created: New Question Created
       
 

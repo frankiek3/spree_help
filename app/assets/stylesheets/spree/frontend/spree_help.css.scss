@@ -1,0 +1,53 @@
+/*
+ *= require spree/frontend
+*/
+
+.question {
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+.faq-sidebar {
+  h3 {
+    color: #404042 !important;
+  }
+
+  .nav > {
+    $faq-color: #103452;
+
+    .active > a, .active:hover > a, .active:focus > a {
+      padding-left: 18px;
+      font-weight: 700;
+      color: $faq-color;
+      border-left: 3px solid $faq-color;
+    }
+
+    li {
+      list-style: none;
+      max-width: 280px;
+
+      > a {
+        display: block;
+        padding: 4px 20px;
+        font-weight: 500;
+
+        &:hover, &:focus {
+          padding-left: 19px;
+          color: $faq-color;
+          text-decoration: none;
+          border-left: 1px solid $faq-color;
+        }
+      }
+    }
+  }
+}
+
+#faqs {
+  h3 {
+    color: #404042 !important;
+  }
+  ul > li {
+    margin-top: 1em;
+  }
+}

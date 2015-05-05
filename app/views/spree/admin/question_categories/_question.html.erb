@@ -5,6 +5,10 @@
       <%= f.hidden_field :id %>
     </div>
     <div class="field">
+      <%= f.check_box :active, class: '' %>
+      <%= f.label :active, Spree.t(:active, scope: :spree_help) %><br />
+    </div>
+    <div class="field">
       <%= f.label :question, Spree::Question.model_name.human(count: 1) %> <span class="required">*</span><br />
       <%= f.text_field :question, class: 'fullwidth title' %>
       <%#= f.error_message_on :question %>

@@ -6,14 +6,14 @@ require 'spree_help/version'
 Gem::Specification.new do |s|
   s.platform     = Gem::Platform::RUBY
   s.name          = 'spree_help'
-  s.version       = SpreeFaq.version
+  s.version       = SpreeHelp.version
   s.summary       = %q{Adds an easy FAQ page for Spree Commerce}
   s.description   = %q{With this gem you get an faq page and the management tools to make it very easy to update your faq and reduce the demand on your sites customer service}
   s.required_ruby_version = '>= 1.9.3'
 
-  s.authors      = ['Josh Nussbaum', 'Tobias Bohwalli']
-  s.email        = 'hi@futhr.io'
-  s.homepage     = 'https://github.com/futhr/spree_help'
+  s.authors      = ['']
+  s.email        = ''
+  s.homepage     = 'https://github.com/frankiek3/spree_help'
   s.license      = %q{BSD-3}
 
   s.files        = `git ls-files`.split("\n")

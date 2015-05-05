@@ -5,7 +5,7 @@ class CreateQuestionCategories < ActiveRecord::Migration
       t.integer :position
       t.references :taxonomy
 
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

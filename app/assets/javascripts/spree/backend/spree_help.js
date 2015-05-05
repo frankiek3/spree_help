@@ -1,6 +1,6 @@
 // spree's version handles 'input', and 'select', but then select2 doesn't work correctly
 
-$(function () {
+$(function() {
   $('.spree_add_fields').off('click').on('click', function() {
     var target = $(this).data("target");
     var new_table_row = $(target + ' tr:first').clone();
@@ -25,6 +25,19 @@ $(function () {
     });
     $(target).append(new_table_row);
     new_table_row.find('.select2').select2();
+  });
+
+  var set_taxon_select2 = function(){
+    if ($('#question_category_taxonomy_id').length) {
+      $('#question_category_taxonomy_id').select2();
+      $('#question_category_taxonomy_id').on("change", function(e) { 
+        $('#question_category_name').val($("#question_category_taxonomy_id option:selected").text());
+      });
+    }
+  }
+
+  $(document).ready(function () {
+    set_taxon_select2();
   });
 
 });

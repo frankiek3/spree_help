@@ -19,3 +19,10 @@ jQuery ->
 
     $.scrollTo($('#questions .question:last'), 800)
     $('.question:last input:first').focus()
+
+  Spree.ready ->
+    if ($('#question_category_taxonomy_id').length) {
+      $('#question_category_taxonomy_id').select2()
+      $('#question_category_taxonomy_id').on 'change', ->
+        $('#question_category_name').val($("#question_category_taxonomy_id option:selected").text())
+

@@ -1,0 +1,75 @@
+<%= render 'spree/admin/shared/configuration_menu' %>
+
+<% content_for :page_title do %>
+  <%= Spree.t(:user_questions, scope: :spree_help) %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <li>
+    <%= link_to_add_fields Spree.t(:add_question, scope: :spree_help), "#questions", {class: 'button fa fa-plus', id: 'new_question_link'} %>
+    <%= button_link_to Spree.t(:back_to_categories, scope: :spree_help), spree.admin_question_categories_path, icon: 'arrow-left' %>
+  </li>
+<% end %>
+
+<%= render partial: 'spree/shared/error_messages', locals: { target: @user_question } %>
+
+
+<div id="edit_user_question"></div>
+
+
+<%= form_for [:admin, @user_question] do |fo| %>
+<%= fo.fields_for :question do |f| %>
+
+<% if @user_question.user %>
+  <div class="field" data-hook="user_id">
+      <span><%= label_tag :user_id, Spree.t(:user_id, scope: :spree_help) %></span> <span class="required">*</span><br/>
+      <span><%= link_to @user_question.user.email, edit_admin_user_path(@user_question.user) %></span>
+  </div>
+<% else %>
+  <div class="field" data-hook="email">
+      <span><%= label_tag :user_email, Spree.t(:user_email, scope: :spree_help) %></span> <span class="required">*</span><br/>
+      <span><%= mail_to @user_question.email %></span>
+  </div>
+<% end %>
+
+  <div class="field" data-hook="link">
+      <span><%= label_tag :link, Spree.t(:link, scope: :spree_help) %></span><br/>
+      <span><%= simple_format h(@user_question.link) %></span>
+  </div>
+
+    <div class="no-border">
+      <span class="handle"></span>
+      <%= f.hidden_field :id %>
+    </div>
+    <div class="field">
+      <%= f.check_box :active, class: '' %>
+      <%= f.label :active, Spree.t(:active, scope: :spree_help) %><br />
+    </div>
+
+  <div class="field" data-hook="question_category">
+      <%= f.label :question_category_id, Spree.t(:question_category, scope: :spree_help) %> <span class="required">*</span><br />
+      <%= f.collection_select(:question_category_id, Spree::QuestionCategory.all, :id, :name, {include_blank: Spree.t('match_choices.none'), selected: @user_question.question_category_id}, {class: 'select2 fullwidth' }) %>
+  </div>
+
+  <div class="field" data-hook="question">
+      <%= label_tag :user_question, Spree.t(:user_question, scope: :spree_help) %></span> <span class="required">*</span><br/>
+      <div><%= simple_format h(@user_question.user_question) %></div>
+  </div>
+    <div class="field">
+      <%= f.label :question, Spree::Question.model_name.human(count: 1) %> <span class="required">*</span><br />
+      <%= f.text_field :question, class: 'fullwidth title' %>
+    </div>
+
+    <div class="field">
+      <%= f.label :answer, Spree.t(:answer, scope: :spree_help) %> <span class="required">*</span><br />
+      <%= f.text_area :answer, rows: 2, class: 'fullwidth' %>
+    </div>
+    <div class="actions">
+      <%= button Spree.t(:add), 'icon-refresh' %>
+      <span class="or"><%= Spree.t(:or) %></span>
+      <%= link_to_with_icon 'icon-remove', Spree.t(:cancel), spree.admin_question_categories_path, class: 'button' %>
+    </div>
+  <div class="form-buttons filter-actions actions" data-hook="buttons">
+  </div>
+<% end %>
+<% end %>

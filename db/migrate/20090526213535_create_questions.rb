@@ -5,8 +5,9 @@ class CreateQuestions < ActiveRecord::Migration
       t.text    :question
       t.text    :answer
       t.integer :position
+      t.boolean :active, :default => false
 
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

@@ -1,6 +1,6 @@
-module SpreeFaq
+module SpreeHelp
 
-  # Returns the version of the currently loaded SpreeFaq as a <tt>Gem::Version</tt>
+  # Returns the version of the currently loaded SpreeHelp as a <tt>Gem::Version</tt>
   def self.version
     Gem::Version.new VERSION::STRING
   end

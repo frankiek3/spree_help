@@ -4,14 +4,15 @@
 
 <%= render partial: 'spree/shared/error_messages', locals: { target: @user_question } %>
 
-<div id="new_user_question">
 <%#= form_for @contact, :url => contacts_path, :html => { :novalidate => '' } do |f| %>
-<%= form_for @user_question, url: user_question_path, remote: true, "data-type" => :json do |f| %>
+<%= form_for @user_question, url: user_question_path, remote: true, method: :put, "data-type" => :json do |f| %>
 
   <div class="columns alpha ten" data-hook="_fieldset_wrapper">
   <fieldset id="" data-hook></fieldset>
 
-  <% if !try_spree_current_user %>
+  <% if try_spree_current_user %>
+    <%= f.hidden_field :user_id %>
+  <% else %>
     <p class="field" data-hook="email">
       <%= f.label :email, Spree.t(:email) %> <span class="required">*</span><br/>
       <%= f.email_field :email, class: 'fullwidth title required email', placeholder: "user@email.com" %>
@@ -29,14 +30,14 @@
     </p>
 
     <p class="field" data-hook="question">
-      <%= f.label :user_question, Spree.t(:user_question, scope: :spree_help) %> <span class="required">*</span><br/>
-      <%= f.text_area :user_question, { rows: '20', class: 'fullwidth required'} %>
+      <%= f.label :question, Spree.t(:question, scope: :spree_help) %> <span class="required">*</span><br/>
+      <%= f.text_area :question, { rows: '20', class: 'fullwidth required'} %>
     </p>
 
     <p><%= f.submit Spree.t(:submit), {alt: Spree.t(:submit), id: 'contact_us_contact_submit', title: Spree.t(:submit), class: 'button primary', tabindex: 4} %></p>
   </div>
 <% end %>
-</div>
+
 
 <% content_for :sidebar do %>
   <% if defined? @taxonomies %>

@@ -3,13 +3,12 @@ class CreateUserQuestions < ActiveRecord::Migration
     create_table :spree_user_questions do |t|
       t.references :question_category
       t.text       :link
-      t.text       :question
+      t.text       :user_question
       t.references :user
       t.text       :email
-      t.datetime   :submitted_at
-      t.datetime    :answered_at
+      t.references :question
 
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end
